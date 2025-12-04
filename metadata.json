@@ -1,0 +1,8 @@
+{
+  "name": "Bhumikompo Alert",
+  "description": "Real-time earthquake tracking application with Bangla UI, map visualization, and AI-powered safety insights.",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera"
+  ]
+}
