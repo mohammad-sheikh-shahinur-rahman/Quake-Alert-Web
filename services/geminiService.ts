@@ -1,7 +1,9 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { EarthquakeFeature } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Safety check for process.env to prevent browser crash if not defined
+const apiKey = (typeof process !== 'undefined' && process.env) ? process.env.API_KEY : '';
+const ai = new GoogleGenAI({ apiKey: apiKey });
 
 export const getSafetyAnalysis = async (recentQuakes: EarthquakeFeature[]): Promise<string> => {
   // Take top 5 significant quakes to avoid token overflow
