@@ -41,7 +41,8 @@ const SafetyTips: React.FC<SafetyTipsProps> = ({ recentQuakes }) => {
   const audioCtxRef = useRef<AudioContext | null>(null);
   const oscillatorRef = useRef<OscillatorNode | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
-  const sirenIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  // Fix: Use ReturnType<typeof setInterval> to handle both Node (NodeJS.Timeout) and Browser (number) types
+  const sirenIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Chatbot State
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
@@ -250,7 +251,7 @@ const SafetyTips: React.FC<SafetyTipsProps> = ({ recentQuakes }) => {
                  ? <CheckSquare className="mr-3 flex-shrink-0 text-green-600" size={20} /> 
                  : <Square className="mr-3 flex-shrink-0 text-slate-300" size={20} />
                }
-               <span className={`text-sm ${checkedItems.includes(item.id) ? 'font-semibold' : ''}`}>
+               <span className="text-sm">
                  {item.label}
                </span>
              </button>

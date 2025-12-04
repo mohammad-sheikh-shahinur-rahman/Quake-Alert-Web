@@ -322,8 +322,9 @@ const App: React.FC = () => {
   useEffect(() => {
     loadData(period);
 
-    // Refresh interval: only for 'day' mode to keep it real-time. 
-    let interval: NodeJS.Timeout;
+    // Refresh interval: only for 'day' mode to keep it real-time.
+    // Fix: Use ReturnType<typeof setInterval> to avoid NodeJS.Timeout vs number conflicts
+    let interval: ReturnType<typeof setInterval> | undefined;
     if (period === 'day') {
       interval = setInterval(() => loadData('day'), 300000); // 5 mins
     }
